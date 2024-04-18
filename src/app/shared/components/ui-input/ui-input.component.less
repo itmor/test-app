@@ -1,0 +1,44 @@
+.ui-input {
+  width: 100%;
+
+  .ui-input__label {
+    color: #3f4254;
+    font-size: 14px;
+    margin-bottom: 13px;
+    font-family: 'Helvetica-regular', sans-serif;
+  }
+
+  .ui-input__input {
+    background-color: #f3f6f9;
+    border-radius: 6px;
+    padding: 14px;
+    color: #3f4254;
+    font-family: 'Helvetica-light', sans-serif;
+    border: 1px solid transparent;
+    width: 100%;
+    box-sizing: border-box;
+
+    &.ui-input__input--invalid {
+      border: 1px solid #ef7da0;
+    }
+
+    &.ui-input__input--email {
+      padding: 14px 14px 14px 47px;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .ui-input__body {
+    position: relative;
+  }
+
+  .ui-input__icon {
+    position: absolute;
+    z-index: 1;
+    bottom: 12px;
+    left: 15px;
+  }
+}

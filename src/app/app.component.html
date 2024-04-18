@@ -1,0 +1,114 @@
+<div class="app">
+  <ui-loader *ngIf="isLoading"></ui-loader>
+
+  <div class="app__actions">
+    <ui-button (click)="openEditor(EditorActionType.Create)">Добавить юзера</ui-button>
+  </div>
+
+  <div></div>
+  <div>
+    <table class="app__table">
+      <tr class="app__table-row">
+        <th class="app__table-header-cell">username</th>
+        <th class="app__table-header-cell">first name</th>
+        <th class="app__table-header-cell">last name</th>
+        <th class="app__table-header-cell">email</th>
+        <th class="app__table-header-cell">type</th>
+      </tr>
+      <ng-container *ngIf="users.length; else noUsers">
+        <tr *ngFor="let user of users" class="app__table-row" (click)="openEditor(EditorActionType.Edit, user)">
+          <td class="app__table-cell">{{ user.userName }}</td>
+          <td class="app__table-cell">{{ user.firstName }}</td>
+          <td class="app__table-cell">{{ user.lastName }}</td>
+          <td class="app__table-cell">{{ user.email }}</td>
+          <td class="app__table-cell">{{ user.type }}</td>
+        </tr>
+      </ng-container>
+      <ng-template #noUsers>
+        <tr class="app__table-row app__table-row--empty">
+          <td class="app__table-cell" colspan="5">Список пользователей пуст</td>
+        </tr>
+      </ng-template>
+    </table>
+  </div>
+
+  <div class="app__editor" *ngIf="isEditorOpened">
+    <div class="app__editor-header">
+      <div class="app__editor-header-title">
+        <div [ngSwitch]="editorType">
+          <div *ngSwitchCase="EditorActionType.Create">Create new user</div>
+          <div *ngSwitchCase="EditorActionType.Edit">{{ selectedUser.firstName }} {{ selectedUser.lastName }}</div>
+        </div>
+      </div>
+      <div class="app__editor-header-close" (click)="closeEditor()">
+        <img src="assets/svg/close.svg" />
+      </div>
+    </div>
+    <div [formGroup]="formGroup">
+      <ui-input
+        class="app__editor-input"
+        placeholder="Username"
+        [required]="true"
+        formControlName="userName"
+        validationError
+      ></ui-input>
+      <ui-input
+        class="app__editor-input"
+        placeholder="First name"
+        [required]="true"
+        formControlName="firstName"
+        validationError
+      ></ui-input>
+      <ui-input
+        class="app__editor-input"
+        placeholder="Last name"
+        [required]="true"
+        formControlName="lastName"
+        validationError
+      ></ui-input>
+      <ui-input
+        class="app__editor-input"
+        placeholder="Email"
+        [required]="true"
+        formControlName="email"
+        validationError
+        [type]="Type.Email"
+      ></ui-input>
+      <ui-input
+        class="app__editor-input"
+        placeholder="Password"
+        [required]="true"
+        formControlName="password"
+        [type]="Type.Password"
+        validationError
+      ></ui-input>
+      <ui-input
+        class="app__editor-input"
+        placeholder="Repeat password"
+        [required]="true"
+        formControlName="confirmPassword"
+        [type]="Type.Password"
+        validationError
+      ></ui-input>
+
+      <ui-dropdown
+        class="app__editor-input"
+        [items]="[
+          { value: UserType.Driver, label: 'Driver' },
+          { value: UserType.Administrator, label: 'Administrator' }
+        ]"
+        formControlName="type"
+      ></ui-dropdown>
+    </div>
+    <div [ngSwitch]="editorType" class="app__editor-actions">
+      <div *ngSwitchCase="EditorActionType.Create" class="app__editor-actions-create">
+        <ui-button (click)="createUser()">Create</ui-button>
+      </div>
+      <div *ngSwitchCase="EditorActionType.Edit" class="app__editor-actions-edit">
+        <ui-button [color]="Color.Warn" (click)="removeUser()">Delete</ui-button>
+        <ui-button (click)="updateUser()">Save</ui-button>
+      </div>
+    </div>
+    <div></div>
+  </div>
+</div>

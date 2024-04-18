@@ -1,0 +1,17 @@
+<div class="ui-input">
+  <div *ngIf="placeholder" class="ui-input__label">{{ placeholder }}<span *ngIf="required">*</span></div>
+  <div class="ui-input__body">
+    <img *ngIf="type === Type.Email" class="ui-input__icon" src="assets/svg/email.svg" />
+    <input
+      class="ui-input__input"
+      [ngClass]="{
+        'ui-input__input--invalid': !isValid && (control.dirty),
+        'ui-input__input--email': type === Type.Email
+      }"
+      [(ngModel)]="value"
+      (blur)="onTouch()"
+      (ngModelChange)="onChange($event)"
+      [attr.type]="type === Type.Password ? 'password' : null"
+    />
+  </div>
+</div>

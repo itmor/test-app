@@ -1,0 +1,13 @@
+<div class="ui-dropdown" (clickOutside)="closeDropdown()">
+  <img class="ui-dropdown__icon" src="assets/svg/arrow.svg" />
+  <input
+    class="ui-dropdown__input"
+    type="text"
+    (click)="toggleDropdown()"
+    [value]="selectedItem ? selectedItem.label : ''"
+    readonly
+  />
+  <ul class="ui-dropdown__list" *ngIf="showDropdown">
+    <li class="ui-dropdown__list-item" *ngFor="let item of items" (click)="selectItem(item.value)">{{ item.label }}</li>
+  </ul>
+</div>

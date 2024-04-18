@@ -1,0 +1,121 @@
+.app {
+  display: grid;
+  grid-template-columns: 1fr 30%;
+  margin: 100px 30px;
+  grid-column-gap: 30px;
+
+  @border-radius: 4px;
+
+  .app__table {
+    width: 100%;
+    border-collapse: collapse;
+
+    tr:last-child td:first-child {
+      border-bottom-left-radius: @border-radius;
+    }
+
+    tr:last-child td:last-child {
+      border-bottom-right-radius: @border-radius;
+    }
+
+    tr:first-child th:first-child {
+      border-top-left-radius: @border-radius;
+    }
+
+    tr:first-child th:last-child {
+      border-top-right-radius: @border-radius;
+    }
+
+    .app__table-row {
+      cursor: pointer;
+
+      &:last-child {
+        .app__table-cell {
+          border-bottom: none;
+        }
+      }
+
+      &:hover {
+        .app__table-cell {
+          background-color: #2e8ff029;
+        }
+      }
+
+      &.app__table-row--empty {
+        .app__table-cell {
+          background-color: white;
+          text-align: center;
+          font-family: 'Helvetica-regular', sans-serif;
+          font-size: 13px;
+        }
+      }
+
+      .app__table-header-cell {
+        background-color: white;
+        text-transform: uppercase;
+        color: #a4a4b5;
+        font-family: 'Helvetica-Bold', sans-serif;
+        text-align: left;
+        font-size: 13px;
+        padding: 20px 10px;
+      }
+
+      .app__table-cell {
+        font-family: 'Helvetica-regular', sans-serif;
+        font-size: 13px;
+        background-color: #f4f5f8;
+        padding: 20px 10px;
+        border-bottom: 1px solid white;
+      }
+    }
+  }
+
+  .app__editor {
+    background-color: white;
+    padding: 15px;
+    border-radius: @border-radius;
+
+    .app__editor-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 29px;
+
+      .app__editor-header-title {
+        color: #3f4254;
+        font-family: 'Helvetica-Bold', sans-serif;
+      }
+
+      .app__editor-header-close {
+        cursor: pointer;
+      }
+    }
+
+    .app__editor-input {
+      display: flex;
+    }
+
+    .app__editor-input + .app__editor-input {
+      margin-top: 10px;
+    }
+
+    .app__editor-actions {
+      margin-top: 30px;
+
+      .app__editor-actions-create {
+        display: flex;
+        justify-content: center;
+      }
+
+      .app__editor-actions-edit {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+
+  .app__actions {
+    display: flex;
+    justify-content: end;
+    margin-bottom: 10px;
+  }
+}
